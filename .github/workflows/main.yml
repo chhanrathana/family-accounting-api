@@ -10,8 +10,8 @@ jobs:
     - name: deploy to development server
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
+        host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PRIVATE_KEY }}
-        port: ${{ secrets.PORT }}
-        script: 'cd /var/www/loan-system && ./deploy.sh'
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: 'cd accounting.khmer-app.com && ./deploy.sh'
