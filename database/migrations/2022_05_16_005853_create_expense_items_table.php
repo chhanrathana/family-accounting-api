@@ -15,15 +15,19 @@ class CreateExpenseItemsTable extends Migration
     {
         Schema::create('expense_items', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('expense_datetime');
+            $table->timestamp('datetime');
             $table->string('description', 255);
-            $table->double('expense_amount')->default(0);       
+            $table->double('amount')->default(0);   
+            $table->enum('currency', ['USD', 'KHR']);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unsignedBigInteger('expense_type_id')->nullable();
-            $table->foreign('expense_type_id')->references('id')->on('expense_types');
-
+            $table->unsignedBigInteger('type_id')->nullable();
+            $table->foreign('type_id')->references('id')->on('expense_types');
+            $table->unsignedBigInteger('family_id')->nullable();
+            $table->foreign('family_id')->references('id')->on('families');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             
         });
     }

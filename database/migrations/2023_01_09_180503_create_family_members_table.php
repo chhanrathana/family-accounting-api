@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExpenseTypesTable extends Migration
+class CreateFamilyMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateExpenseTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('expense_types', function (Blueprint $table) {               
-            $table->id();           
-            $table->string('name_kh', 255);
-            $table->string('name_en', 255)->nullable();
+        Schema::create('family_members', function (Blueprint $table) {
+            $table->id();
+            $table->string('name_kh', 50);
+            $table->string('name_en', 50);  
             $table->integer('sort')->default(10);  
             $table->boolean('active')->default(1);  
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger('family_id')->nullable();
             $table->foreign('family_id')->references('id')->on('families');
+            $table->unsignedBigInteger('position_id')->nullable();
+            $table->foreign('position_id')->references('id')->on('family_positions');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -35,6 +37,6 @@ class CreateExpenseTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expense_types');
+        Schema::dropIfExists('family_members');
     }
 }
