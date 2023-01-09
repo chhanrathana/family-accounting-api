@@ -14,4 +14,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.SSH_PORT }}
-        script: 'cd accounting.khmer-app.com && ./deploy.sh'
+        run: |
+          cd accounting.khmer-app.com
+          npm install
+          git reset --hard        
